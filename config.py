@@ -31,7 +31,7 @@ import pygame
 import os
 
 # My Google-API key:
-gKey = 'AIzaSyBiTDPV_4_S8ObB1zwQm97x-Y80IxbQmNU'
+gKey = '<your api key>'
 
 
 # Teensy USB serial: symbolic link set up by creating:
