@@ -68,7 +68,7 @@ class Tab_Data:
 
     # Generate text for header:
     def getHeaderText(self):
-        return [self.name, self.root_parent.gpsModule.locality, main.getTimeStr(),]
+        return [self.name, self.root_parent.gpsmodule.locality, main.getTimeStr(),]
 
     # Trigger page-functions
     def drawPage(self, modeNum):

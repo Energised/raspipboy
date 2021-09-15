@@ -22,7 +22,7 @@ HEIGHT = 240
 defaultPlace = "Washington DC"
 
 # Player data:
-PLAYERNAME = 'Niil'
+PLAYERNAME = 'Energised'
 PLAYERLEVEL = 33
 
 FPS = 15
@@ -31,7 +31,7 @@ import pygame
 import os
 
 # My Google-API key:
-gKey = '<insert key here>'
+gKey = 'AIzaSyBiTDPV_4_S8ObB1zwQm97x-Y80IxbQmNU'
 
 
 # Teensy USB serial: symbolic link set up by creating:
@@ -122,7 +122,7 @@ if USE_INTERNET:
     def internet_on():
         try:
             # Can we access this Google address?
-            response = urlopen('http://74.125.228.100', timeout=1)
+            response = urlopen('https://www.google.com', timeout=1)
             return True
         except Exception as err:
             pass

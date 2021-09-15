@@ -265,8 +265,8 @@ class Engine:
         hicol_canvas = canvas.convert(24)
         for res_div in divRange(max_div):
 
-            blur_image = pygame.transform.smoothscale(hicol_canvas, (self.canvas_size[0] / res_div,
-                                                                   self.canvas_size[1] / res_div))
+            blur_image = pygame.transform.smoothscale(hicol_canvas, (int(self.canvas_size[0] / res_div),
+                                                                   int(self.canvas_size[1] / res_div)))
             blur_image = pygame.transform.smoothscale(blur_image, self.canvas_size)
 
             # Add faded sharp image:

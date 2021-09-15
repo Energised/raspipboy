@@ -9,7 +9,7 @@ import datetime
 import random
 import math
 import numpy
-import urllib
+from urllib.request import urlretrieve
 from PIL import Image, ImageEnhance
 from gdal2tiles import GlobalMercator
 from pygame.locals import *
@@ -247,13 +247,12 @@ class Mode_Map:
                 else:
                     print("  Invalid cache-version, ignoring file")
 
-        # doDownload doesn't seem to be called, need to update this API call -url and give key args
         if doDownload:
             print("DOWNLOADING:")
             mapUrl = "http://maps.googleapis.com/maps/api/staticmap?center=%s" % (self.mapLocation)
-            mapUrl += ("&zoom=%s&scale=%s&size=%sx%s%s&sensor=true%key=%s" % (str(self.mapZoom), str(self.mapScale), str(self.mapSize), str(self.mapSize), self.mapArgs, config.gKey))
+            mapUrl += ("&zoom=%s&scale=%s&size=%sx%s%s&sensor=true&key=%s" % (str(self.mapZoom), str(self.mapScale), str(self.mapSize), str(self.mapSize), self.mapArgs, config.gKey))
             print(mapUrl)
-            urllib.urlretrieve(mapUrl, self.mapFilename)
+            urlretrieve(mapUrl, self.mapFilename)
 
             if self.mapType == 1:
                 # Download a set of places from Google for markers:
@@ -273,12 +272,13 @@ class Mode_Map:
 
             # Load downloaded image via PIL, and tweak contrast/brightness:
             im = Image.open(self.mapFilename)
-            im = ImageEnhance.Contrast(im).enhance(1.5)
-            im = ImageEnhance.Brightness(im).enhance(0.2)
+            # commenting these out for now - TODO fix
+            #im = ImageEnhance.Contrast(im).enhance(1.5)
+            #im = ImageEnhance.Brightness(im).enhance(0.2)
             im = im.convert("RGB")
 
             # Convert PIL image to Pygame surface:
-            self.mapImage = pygame.image.frombuffer(im.tostring(), im.size, "RGB")
+            self.mapImage = pygame.image.frombuffer(im.tobytes(), im.size, "RGB")
 
             # Add lines to World Map:
             if self.mapType == 1:
@@ -322,8 +322,8 @@ class Mode_Map:
     def drawCurrentPosToCanvas(self):
         '''Draw current-position marker:'''
         # Get position on map:
-        px = (self.root_parent.gpsModule.lon - self.minLon) * self.xPerLon
-        py = self.mapImageSize - ((self.root_parent.gpsModule.lat - self.minLat) * self.yPerLat)
+        px = (self.root_parent.gpsmodule.lon - self.minLon) * self.xPerLon
+        py = self.mapImageSize - ((self.root_parent.gpsmodule.lat - self.minLat) * self.yPerLat)
 
         # Get position on screen:
         px += self.viewPosX
