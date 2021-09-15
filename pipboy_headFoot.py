@@ -15,7 +15,7 @@ class Header:
 
     def __init__(self, *args, **kwargs):
         self.parent = args[0]
-        self.rootParent = self.parent.rootParent
+        self.root_parent = self.parent.root_parent
         self.canvas = pygame.Surface((config.WIDTH, config.HEIGHT))
 
     def drawHeader(self):

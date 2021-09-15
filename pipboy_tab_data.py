@@ -22,7 +22,7 @@ class Tab_Data:
 
         def __init__(self, *args, **kwargs):
             self.parent = args[0]
-            self.rootParent = self.parent.rootParent
+            self.root_parent = self.parent.root_parent
             self.name = "Quests"
             self.pageCanvas = pygame.Surface((config.WIDTH, config.HEIGHT))
 
@@ -47,7 +47,7 @@ class Tab_Data:
 
         def __init__(self, *args, **kwargs):
             self.parent = args[0]
-            self.rootParent = self.parent.rootParent
+            self.root_parent = self.parent.root_parent
             self.name = "Misc"
             self.pageCanvas = pygame.Surface((config.WIDTH, config.HEIGHT))
 
@@ -68,7 +68,7 @@ class Tab_Data:
 
     # Generate text for header:
     def getHeaderText(self):
-        return [self.name, self.rootParent.gpsModule.locality, main.getTimeStr(),]
+        return [self.name, self.root_parent.gpsModule.locality, main.getTimeStr(),]
 
     # Trigger page-functions
     def drawPage(self, modeNum):
@@ -83,7 +83,7 @@ class Tab_Data:
 
     def __init__(self, *args, **kwargs):
         self.parent = args[0]
-        self.rootParent = self.parent.rootParent
+        self.root_parent = self.parent.root_parent
         self.canvas = pygame.Surface((config.WIDTH, config.HEIGHT))
         self.drawnPageNum = -1
 

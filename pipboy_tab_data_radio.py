@@ -12,7 +12,7 @@ class Mode_Radio:
 
     def __init__(self, *args, **kwargs):
         self.parent = args[0]
-        self.rootParent = self.parent.rootParent
+        self.root_parent = self.parent.root_parent
         self.name = "Radio"
         self.pageCanvas = pygame.Surface((config.WIDTH, config.HEIGHT))
 

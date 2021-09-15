@@ -31,7 +31,7 @@ import pygame
 import os
 
 # My Google-API key:
-gKey = '<api-key-here>'
+gKey = 'AIzaSyBqCmBguyTdH8DKLW6mVEuFLErKhd__D60'
 
 
 # Teensy USB serial: symbolic link set up by creating:
@@ -117,14 +117,14 @@ print("(done)")
 
 # Test internet connection:
 if USE_INTERNET:
-    import urllib2
+    from urllib.request import urlopen
 
     def internet_on():
         try:
             # Can we access this Google address?
-            response = urllib2.urlopen('http://74.125.228.100', timeout=1)
+            response = urlopen('http://74.125.228.100', timeout=1)
             return True
-        except urllib2.URLError as err:
+        except Exception as err:
             pass
         return False
 

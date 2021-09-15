@@ -53,7 +53,7 @@ class Mode_Map:
 
     def __init__(self, *args, **kwargs):
         self.parent = args[0]
-        self.rootParent = self.parent.rootParent
+        self.root_parent = self.parent.root_parent
 
         self.pageCanvas = pygame.Surface((config.WIDTH, config.HEIGHT))
         self.mapCanvas = pygame.Surface((config.WIDTH, config.HEIGHT * 0.91))
@@ -105,7 +105,7 @@ class Mode_Map:
 
         if self.mapType == 0:
             # LOCAL MAP DATA:
-            self.rootParent.localMapPage = self
+            self.root_parent.localMapPage = self
             self.name = "Local Map"
             self.mapFilename = ("%s/map_local.jpg" %(config.CACHEPATH))
             self.dataFilename = ("%s/map_local.txt" %(config.CACHEPATH))
@@ -126,7 +126,7 @@ class Mode_Map:
 
         else:
             # WORLD MAP DATA:
-            self.rootParent.worldMapPage = self
+            self.root_parent.worldMapPage = self
             self.name = "World Map"
             self.mapFilename = ("%s/map_world.jpg" % (config.CACHEPATH))
             self.dataFilename = ("%s/map_world.txt" % (config.CACHEPATH))
@@ -201,8 +201,8 @@ class Mode_Map:
     def setViewToCurPos(self):
         '''Set user-view to centre in on current location:'''
         # Get position on map:
-        px = (self.rootParent.gpsModule.lon - self.minLon) * self.xPerLon
-        py = self.mapImage.get_width() - ((self.rootParent.gpsModule.lat - self.minLat) * self.yPerLat)
+        px = (self.root_parent.gpsmodule.lon - self.minLon) * self.xPerLon
+        py = self.mapImage.get_width() - ((self.root_parent.gpsmodule.lat - self.minLat) * self.yPerLat)
 
         self.viewPosX = (0.5 * config.WIDTH) - px
         self.viewPosY = (0.5 * config.HEIGHT) - py
@@ -212,13 +212,13 @@ class Mode_Map:
         lat, lon = 0, 0
 
         if self.mapType == 0:
-            lat = self.rootParent.gpsModule.lat
-            lon = self.rootParent.gpsModule.lon
+            lat = self.root_parent.gpsmodule.lat
+            lon = self.root_parent.gpsmodule.lon
             self.mapLocation = ("%s,%s" % (str(lat), str(lon)))
         else:
-            self.mapLocation = self.rootParent.gpsModule.locality
-            lat = self.rootParent.gpsModule.localityLat
-            lon = self.rootParent.gpsModule.localityLon
+            self.mapLocation = self.root_parent.gpsmodule.locality
+            lat = self.root_parent.gpsmodule.localityLat
+            lon = self.root_parent.gpsmodule.localityLon
 
         # Load cached data, if found:
         if (not config.FORCE_DOWNLOAD) and (os.path.exists(self.dataFilename)) and (os.path.exists(self.mapFilename)):
@@ -247,10 +247,11 @@ class Mode_Map:
                 else:
                     print("  Invalid cache-version, ignoring file")
 
+        # doDownload doesn't seem to be called, need to update this API call -url and give key args
         if doDownload:
             print("DOWNLOADING:")
             mapUrl = "http://maps.googleapis.com/maps/api/staticmap?center=%s" % (self.mapLocation)
-            mapUrl += ("&zoom=%s&scale=%s&size=%sx%s%s&sensor=true" % (str(self.mapZoom), str(self.mapScale), str(self.mapSize), str(self.mapSize), self.mapArgs))
+            mapUrl += ("&zoom=%s&scale=%s&size=%sx%s%s&sensor=true%key=%s" % (str(self.mapZoom), str(self.mapScale), str(self.mapSize), str(self.mapSize), self.mapArgs, config.gKey))
             print(mapUrl)
             urllib.urlretrieve(mapUrl, self.mapFilename)
 
@@ -321,8 +322,8 @@ class Mode_Map:
     def drawCurrentPosToCanvas(self):
         '''Draw current-position marker:'''
         # Get position on map:
-        px = (self.rootParent.gpsModule.lon - self.minLon) * self.xPerLon
-        py = self.mapImageSize - ((self.rootParent.gpsModule.lat - self.minLat) * self.yPerLat)
+        px = (self.root_parent.gpsModule.lon - self.minLon) * self.xPerLon
+        py = self.mapImageSize - ((self.root_parent.gpsModule.lat - self.minLat) * self.yPerLat)
 
         # Get position on screen:
         px += self.viewPosX

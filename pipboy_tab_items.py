@@ -19,7 +19,7 @@ class Tab_Items:
 
         def __init__(self, *args, **kwargs):
             self.parent = args[0]
-            self.rootParent = self.parent.rootParent
+            self.root_parent = self.parent.root_parent
             self.pageCanvas = pygame.Surface((config.WIDTH, config.HEIGHT))
 
         def drawPage(self):
@@ -55,7 +55,7 @@ class Tab_Items:
     def __init__(self, *args, **kwargs):
         '''Tab init:'''
         self.parent = args[0]
-        self.rootParent = self.parent.rootParent
+        self.root_parent = self.parent.root_parent
         self.canvas = pygame.Surface((config.WIDTH, config.HEIGHT))
         self.drawnPageNum = -1
 

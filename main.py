@@ -56,6 +56,7 @@ class Engine:
         pygame.display.init()
         print("(done)")
 
+
         self.root_parent = self
         self.screen_size = (pygame.display.Info().current_w, pygame.display.Info().current_h)
         self.canvas_size = (config.WIDTH, config.HEIGHT)
@@ -92,6 +93,8 @@ class Engine:
         backadd = 30
         self.background.fill((backadd, backadd, backadd), None, pygame.BLEND_RGB_ADD)
 
+
+
         # Untextured background:
         # self.background = pygame.Surface(self.canvas_size)
         # greyback = 100
@@ -103,7 +106,7 @@ class Engine:
         scanline = config.IMAGES["scanline"]
         line_count = 60  # 48 60 80
         line_height = config.HEIGHT / line_count
-        scanline = pygame.transform.smoothscale(scanline, (config.WIDTH, line_height))
+        scanline = pygame.transform.smoothscale(scanline, (config.WIDTH, int(line_height)))
 
         self.scanlines = pygame.Surface(self.canvas_size)
         y_pos = 0
@@ -130,7 +133,7 @@ class Engine:
         # Set up data for generating overlay frames
         dostort_line = config.IMAGES["distort"]
         dostort_line_height = (config.HEIGHT / 4)
-        dostort_line = pygame.transform.smoothscale(dostort_line, (config.WIDTH, dostort_line_height))
+        dostort_line = pygame.transform.smoothscale(dostort_line, (config.WIDTH, int(dostort_line_height)))
         dostort_line = dostort_line.convert()
         distort_y = -dostort_line_height
         distort_speed = (config.HEIGHT / 40)

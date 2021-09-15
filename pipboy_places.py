@@ -4,8 +4,8 @@
 
 import time
 import urllib
-import urllib2
-import StringIO
+from urllib.request import urlopen
+from io import StringIO
 import json
 import config
 
@@ -127,7 +127,7 @@ def getPlaces(lat, lon, radius=2000, types='establishment'):
         pageNum += 1
         # print("Page %s: %s" %(pageNum, url))
 
-        response = urllib2.urlopen(url)
+        response = urlopen(url)
         responseBody = response.read()
 
         body = StringIO.StringIO(responseBody)

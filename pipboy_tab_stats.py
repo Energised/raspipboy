@@ -29,7 +29,7 @@ class Tab_Stats:
 
             def __init__(self, *args, **kwargs):
                 self.parent = args[0]
-                self.rootParent = self.parent.rootParent
+                self.root_parent = self.parent.root_parent
                 self.name = 'CND'
                 self.pageCanvas = pygame.Surface((config.WIDTH, config.HEIGHT))
 
@@ -82,7 +82,7 @@ class Tab_Stats:
 
             def __init__(self, *args, **kwargs):
                 self.parent = args[0]
-                self.rootParent = self.parent.rootParent
+                self.root_parent = self.parent.root_parent
                 self.name = args[1]
                 self.pageCanvas = pygame.Surface((config.WIDTH, config.HEIGHT))
 
@@ -97,7 +97,7 @@ class Tab_Stats:
                         # Only do this every so often...
                         if self.frameNum == 0:
                             # Send query to Teensy to get current battery voltage:
-                            self.rootParent.ser.write("volts\n")
+                            self.root_parent.ser.write("volts\n")
                             # (value is returned and set via page-events queue)
                         elif self.frameNum == 15:
                             self.frameNum = -1
@@ -111,7 +111,7 @@ class Tab_Stats:
                         # Only do this every so often...
                         if self.frameNum == 0:
                             # Send query to Teensy to get current temperature:
-                            self.rootParent.ser.write("temp\n")
+                            self.root_parent.ser.write("temp\n")
                             # (value is returned and set via page-events queue)
                         elif self.frameNum == 15:
                             self.frameNum = -1
@@ -292,7 +292,7 @@ class Tab_Stats:
 
         def __init__(self, *args, **kwargs):
             self.parent = args[0]
-            self.rootParent = self.parent.rootParent
+            self.root_parent = self.parent.root_parent
             self.name = "Status"
 
             # Set up list of sub-pages:
@@ -390,7 +390,7 @@ class Tab_Stats:
 
         def __init__(self, *args, **kwargs):
             self.parent = args[0]
-            self.rootParent = self.parent.rootParent
+            self.root_parent = self.parent.root_parent
             self.name = "S.P.E.C.I.A.L."
             self.pageCanvas = pygame.Surface((config.WIDTH, config.HEIGHT))
 
@@ -415,7 +415,7 @@ class Tab_Stats:
 
         def __init__(self, *args, **kwargs):
             self.parent = args[0]
-            self.rootParent = self.parent.rootParent
+            self.root_parent = self.parent.root_parent
             self.name = "Skills"
             self.pageCanvas = pygame.Surface((config.WIDTH, config.HEIGHT))
 
@@ -440,7 +440,7 @@ class Tab_Stats:
 
         def __init__(self, *args, **kwargs):
             self.parent = args[0]
-            self.rootParent = self.parent.rootParent
+            self.root_parent = self.parent.root_parent
             self.name = "Perks"
             self.pageCanvas = pygame.Surface((config.WIDTH, config.HEIGHT))
 
@@ -465,7 +465,7 @@ class Tab_Stats:
 
         def __init__(self, *args, **kwargs):
             self.parent = args[0]
-            self.rootParent = self.parent.rootParent
+            self.root_parent = self.parent.root_parent
             self.name = "General"
             self.pageCanvas = pygame.Surface((config.WIDTH, config.HEIGHT))
 
@@ -502,7 +502,7 @@ class Tab_Stats:
     # Tab init:
     def __init__(self, *args, **kwargs):
         self.parent = args[0]
-        self.rootParent = self.parent.rootParent
+        self.root_parent = self.parent.root_parent
         self.canvas = pygame.Surface((config.WIDTH, config.HEIGHT))
         self.drawnPageNum = -1
 

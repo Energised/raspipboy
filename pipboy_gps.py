@@ -5,9 +5,9 @@
 import os
 import time
 import math
-import urllib
-import urllib2
-import StringIO
+from urllib.parse import urlencode
+from urllib.request import urlopen
+from io import StringIO
 import json
 import config
 
@@ -48,14 +48,17 @@ class GpsModuleClass:
         urlParams = {
             'address': address,
             'sensor': 'false',
+            'key': config.gKey
         }
-        url = 'http://maps.google.com/maps/api/geocode/json?' + urllib.urlencode(urlParams)
+        url = 'https://maps.googleapis.com/maps/api/geocode/json?' + urlencode(urlParams)
         print(url)
-        response = urllib2.urlopen(url)
+        response = urlopen(url)
         responseBody = response.read()
 
-        body = StringIO.StringIO(responseBody)
+        body = StringIO(responseBody.decode("utf-8"))
         result = json.load(body)
+        print("------")
+        print(result)
         if 'status' not in result or result['status'] != 'OK':
             return None
         else:
@@ -67,14 +70,16 @@ class GpsModuleClass:
         urlParams = {
             'latlng': (str(lat) + "," + str(lon)),
             'sensor': 'false',
+            'key': config.gKey
         }
-        url = 'http://maps.google.com/maps/api/geocode/json?' + urllib.urlencode(urlParams)
+        url = 'https://maps.googleapis.com/maps/api/geocode/json?' + urlencode(urlParams)
+        
         print("latLongToLocality:")
         print(url)
-        response = urllib2.urlopen(url)
+        response = urlopen(url)
         responseBody = response.read()
 
-        body = StringIO.StringIO(responseBody)
+        body = StringIO(responseBody.decode("utf-8"))
         result = json.load(body)
         if 'status' not in result or result['status'] != 'OK':
             return None
